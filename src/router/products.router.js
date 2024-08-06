@@ -1,14 +1,21 @@
 import {Router} from 'express';
 import {check_conditions} from "../middlewares/check_conditions.js" 
 import productDao from '../dao/MongoDB/product.dao.js';
+import {check_Token} from "../middlewares/check_token_middleware.js" 
 const router = Router();
 
+
+/////////////////////////////////////////////////////COOKIES///////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
 
 
 
 //opciones de filtrado recibidas por query
 
-router.get("/", async(req, res) => {
+router.get("/", check_Token ,async(req, res) => {
   try{
     ///////////////////////////////////////////
     const { limit, page, sort, category, status,stock } = req.query;

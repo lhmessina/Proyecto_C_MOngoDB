@@ -9,6 +9,7 @@ const cartCollection = "cart"; // Nombre de mi coleccion
 const cartSchema = new mongoose.Schema({
   products: {
     type: [{ product: { type: mongoose.Schema.Types.ObjectId, ref: "product" }, quantity: Number }],
+    default: [],
   },
 });
 
