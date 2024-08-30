@@ -4,30 +4,29 @@
 
 import { productModel } from "./models/products.model.js";
 
+const create = async (data) => {
+  const product = await productModel.create(data);
+}
 
 
 
-// const getAll = async () => {
-//     const products = await productModel.find({ status: true });
-//     return products;
-//   };
+
     const getAll = async (query, option) => {
     const products = await productModel.paginate(query, option)
-        return products;
-     };
+        return products; 
+      };
   
   const getById = async (id) => {
     const product = await productModel.findById(id);
     return product;
-  };
+     };
   
-  const create = async (data) => {
-    const product = await productModel.create(data);
-    
-  };
-  
+ 
   const update = async (id, data) => {
+    
+    
     const productUpdate = await productModel.findByIdAndUpdate(id, data, { new: true });
+    
     return productUpdate;
   };
   

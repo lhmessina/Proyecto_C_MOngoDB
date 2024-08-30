@@ -5,7 +5,7 @@ export const passportCall = (strategy) => {
   return async (req = request, res = response, next) => {
     passport.authenticate(strategy, (err, user, info) => {
       if (err) return next(err);
-      console.log('user desde passport.middleware',user)
+      //console.log('user desde passport.middleware',user)
       if (!user) return res.status(401).json({ status: "error", msg: info.message ? info.message : info.toString() });
       
       req.user = user;

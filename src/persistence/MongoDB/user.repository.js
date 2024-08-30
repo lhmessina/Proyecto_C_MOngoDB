@@ -15,7 +15,7 @@ const getById = async (id) => {
                                 };
 const getByemail = async (email) => {
             const user = await userModel.findOne({email:email});
-            //console.log('kkkk',user)
+            
             return user;
                                                                 };
   

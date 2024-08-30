@@ -6,7 +6,7 @@ export const connectMongoDB = async () => {
         
        
             
-        mongoose.connect(envs.MONGO_A_URL)
+        mongoose.connect(process.env.MONGO_URL)
         console.log( "MongoDB connected")
     }
     catch (err){

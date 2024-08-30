@@ -1,5 +1,5 @@
 import { Router } from "express";
-import productManager from "../dao/filesystem/productManager.js";
+import productManager from "../persistence/filesystem/productManager.js";
 import { io } from "../app.js";
 
 const router = Router();

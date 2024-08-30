@@ -39,10 +39,10 @@ return cart;
 
 
 
-const update_cart = async (cid,cart_id) => {
-    
+// const update_cart = async (cid,cart_id) => {
+  const update_cart = async (cid,data) => { 
 
-    const cart = cartModel.findByIdAndUpdate(cid,cart_id,{ new: true })
+    const cart = cartModel.findByIdAndUpdate(cid,data,{ new: true })
     
     return cart;
 }
@@ -82,20 +82,25 @@ const delete_prod_from_cart =async (cid,pid) => {
              if (productInCart == undefined)
               {return (`El Producto ${pid} no se encuentra en el carro`)  }
     
+                      console.log('cantidad:',productInCart.quantity)
+                      if (productInCart.quantity == 0){
+                       cart.products = cart.products.filter( (element) => element.product != pid)
+                       await cart.save()
+                       return (` No hay mas productos  con id ${pid} en el carrito ${cid}`);}
 
-                      cart.products = cart.products.filter( (element) => element.product != pid)
-                      
-                      
-    
+                      else productInCart.quantity = productInCart.quantity-1
                       await cart.save()
+                      return (` Descontamos un  producto  ${pid}  del carrito ${cid}`);}
+    
+                      
 
                       }
                      
                     
            
 
-    return (` El Producto  ${pid} fue eliminado del carrito ${cid}`);
-    }
+    //return (` El Producto  ${pid} fue eliminado del carrito ${cid}`);
+    //}
 
   const update_quantity2cart = async(cid, pid,new_quantity) => {
     

@@ -1,7 +1,8 @@
 import { request, response, Router } from "express";
 import session from "express-session";
-import userDao from "../dao/MongoDB/user.dao.js";
-
+//import userDao from "../repository/MongoDB/user.dao.js";
+//import userDao from "../repository/MongoDB/user.dao.js";
+import userDao from "../persistence/MongoDB/cart.repository.js"
 import {createHash, isValidPassword} from "../utils/hashPass.js"
 import { createToken } from "../utils/jwt.js";
 import {check_Token} from "../middlewares/check_token_middleware.js" 
@@ -37,18 +38,18 @@ router.post("/login", passport.authenticate("login"), async (req = request, res=
     
     // done le retorna desde passport un user invalido ( email o pass) para q lo envie al cliente
     if ( req.user == "invalido" ) return res.status(400).json({status : "NOK" , message : "User not exists in DB"})
-    
+    if ( req.user == "invalid_pass" ) return res.status(400).json({status : "NOK" , message : "User or Password incorrectos"})
       
       
     
       const token = createToken(req.user);
-     // console.log('token creado',token)
+     
     res.cookie("token_by_cookie", token, { httpOnly: true });
     
     return res.status(200).json({ status: "ok", payload: req.user,token });
 
    } catch (error) {
-    console.log(error);
+    
      res.status(500).json({ status: "error", msg: "Internal server error" });
          }
 });

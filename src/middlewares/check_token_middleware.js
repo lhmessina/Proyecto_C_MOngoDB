@@ -6,7 +6,7 @@ export const check_Token = async (req = request, res= response, next) => {
     try{
         const token = req.cookies.token_by_cookie;
         
-        console.log('middleware',token)
+        //console.log('middleware',token)
         if (!token) return res.status(401).json({status:"error", msg : "Token not provided"}) 
         
         const test_token = verifyToken(token)

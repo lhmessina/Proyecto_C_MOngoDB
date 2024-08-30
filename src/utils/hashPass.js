@@ -6,8 +6,12 @@ export const createHash = function (password) {
    return has_pass;
 }
 
+ 
 
-
-export const isValidPassword = (password,user) => {return bcrypt.compareSync(password,user.password)
+export const isValidPassword = (password,userPassword) => {
+   // console.log('password', password)
+   // console.log('user pass',userPassword)
+   
+   return bcrypt.compareSync(password,userPassword)
     
 }
